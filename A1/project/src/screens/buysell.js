@@ -29,16 +29,9 @@ export default class buysell extends Component<{}> {
     return (
       <View>
 	  <View style={{width: 400, height: 200, position: 'absolute', backgroundColor: 'steelblue'}} />
-   	 <Text style={styles.welcome}>
-         $USD: 123
-      </Text>
       <Text style={styles.instructions}>
-          THIS IS BUYSELL 
+          BUYSELL SCREEN 
       </Text>
-   <Image
-          style={styles.image1}
-          source={require('./price.png')}
-		  />
 		
       </View>
     );
