@@ -33,7 +33,7 @@ export default class Home extends Component<{}> {
  // const tabbarStyles = [styles.tabbar];
     return (
       <View>
-	  <View style={{width: 400, height: 200, position: 'absolute', backgroundColor: 'steelblue'}} />
+	  <View style={{width: 400, height: 200, position: 'absolute', backgroundColor: 'steelblue'}}/>
    	 <Text style={styles.welcome}>
          $USD: 123
       </Text>
@@ -43,7 +43,12 @@ export default class Home extends Component<{}> {
    <Image
           style={styles.image1}
           source={require('./price.png')}
-		  />
+	/>
+	
+	 <Image
+          style={styles.image2}
+          source={require('./bitcoin.png')}
+	/>
 		
       </View>
     );
@@ -66,11 +71,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
    image1: {
-    height:200,
-    width:100,
-    alignItems: 'center',
-    justifyContent:'center',
-	//resizeMode: 'contain',
+    height:150,
+    width:null,
+    //alignItems: 'center',
+    //justifyContent:'center',
+	resizeMode: 'contain',
+	//borderBottomWidthWidthWidth: -100
+  },
+    image2: {
+    height:220,
+    width:null,
+    //alignItems: 'center',
+    //justifyContent:'center',
+	resizeMode: 'contain',
+	//borderBottomWidthWidthWidth: -100
   },
     tabbar: {
     backgroundColor:'white',
