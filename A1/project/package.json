@@ -10,7 +10,9 @@
     "react": "16.2.0",
     "react-native": "^0.52.2",
     "react-native-router-flux": "^4.0.0-beta.28",
-    "react-native-tabs": "^1.0.9"
+    "react-native-tabbar-bottom": "^1.0.4",
+    "react-native-tabs": "^1.0.9",
+    "react-navigation": "git+https://github.com/react-community/react-navigation.git"
   },
   "devDependencies": {
     "babel-jest": "22.1.0",

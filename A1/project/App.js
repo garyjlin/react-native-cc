@@ -5,12 +5,26 @@
  */
 
 import React, { Component } from 'react';
-import Navigation from './src/navigation';
+//import Navigation from './src/navigation';
+import {TabNavigator} from "react-navigation"
+import buysellscreen from "./src/screens/buysell";
+import homescreen from "./src/screens/home";
 
-export default class App extends Component {
+var myTabs = TabNavigator({
+	Home: {screen: homescreen},
+	Buy_Sell: {screen: buysellscreen}
+},
+{
+	tabBarPosition: 'bottom'
+}
+);
+
+
+export default myTabs;
+/*export default class App extends Component {
   render() {
     return (
       <Navigation/>
     );
   }
-}
+} */

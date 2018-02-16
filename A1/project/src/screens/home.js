@@ -12,7 +12,7 @@ import {
   Text,
   View
 } from 'react-native';
-import Tabs from 'react-native-tabs';
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -21,6 +21,11 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+/*var myTabs = TabNavigator({
+	Tab1: {screen: buysellscreen}
+	
+}); */
+
 export default class Home extends Component<{}> {
   render() {
 	 // const { page } = this.state;
@@ -28,18 +33,17 @@ export default class Home extends Component<{}> {
  // const tabbarStyles = [styles.tabbar];
     return (
       <View>
-	  <Text style={styles.welcome}>
-          $USD: 123
+	  <View style={{width: 400, height: 200, position: 'absolute', backgroundColor: 'steelblue'}} />
+   	 <Text style={styles.welcome}>
+         $USD: 123
       </Text>
       <Text style={styles.instructions}>
-          View your account 
+          View Your Account 
       </Text>
    <Image
-          style={{width: 50, height: 50}}
-          source={{uri: 'http://www.marketoracle.co.uk/images/2013/Feb/Microsoft_share_price_chart.jpg'}}
-        />
-	  <View style={{width: 400, height: 300, backgroundColor: 'steelblue'}} />
-
+          style={styles.image1}
+          source={require('./price.png')}
+		  />
 		
       </View>
     );
@@ -48,15 +52,25 @@ export default class Home extends Component<{}> {
 
 const styles = StyleSheet.create({
   welcome: {
-	marginTop: 5,
-    fontSize: 20,
+	marginTop: 30,
+    fontSize: 25,
+	color: '#ffffff',
+	fontWeight: "bold",
     textAlign: 'center',
-    margin: 10,
+    margin: 20,
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
-    marginBottom: 3,
+	fontSize: 15,
+    color: '#ffffff',
+    marginBottom: 10,
+  },
+   image1: {
+    height:200,
+    width:100,
+    alignItems: 'center',
+    justifyContent:'center',
+	//resizeMode: 'contain',
   },
     tabbar: {
     backgroundColor:'white',
