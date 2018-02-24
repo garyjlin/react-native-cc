@@ -12,7 +12,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { Button, Modal } from 'react-native';
+import { Button, Modal, TextInput } from 'react-native';
 import { TouchableOpacity, TouchableNativeFeedback, TouchableWithoutFeedback } from 'react-native';
 
 
@@ -82,8 +82,18 @@ export default class buysell extends Component<{}> {
 				style = {styles.Button3}
 				onPress={() => { this.closeModal() }}
 			>
-			<Text>X</Text>
+			<Text style = {styles.exitinstructions}>X</Text>
 			</TouchableOpacity>
+       { this.state.mode === 'buy' ?
+         <Text style={styles.instructions}>
+          Buy Bitcoin
+         </Text> :
+         <Text style={styles.instructions}>
+          Sell Bitcoin
+         </Text>
+       }
+	   <Text> ──────────────────────────────────── </Text>
+	   
 		  </View>
 	</Modal>
 	</View>
@@ -118,6 +128,14 @@ const styles = StyleSheet.create({
   },
   instructions: {
     textAlign: 'center',
+	fontSize: 17,
+    color: '#ffffff',
+	fontWeight: "bold",
+    marginBottom: 10,
+  },
+    exitinstructions: {
+    textAlign: 'left',
+	//marginTop: 15,
 	fontSize: 17,
     color: '#ffffff',
 	fontWeight: "bold",
