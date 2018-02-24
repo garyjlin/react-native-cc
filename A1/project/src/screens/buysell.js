@@ -28,7 +28,7 @@ export default class buysell extends Component<{}> {
     super(props);
     
     this.state = {
-      mode: 'sell',
+      mode: 'buy',
 	  modalVisible:true,
     };
     
@@ -82,7 +82,7 @@ export default class buysell extends Component<{}> {
              animationType={'slide'}
              onRequestClose={() => this.closeModal()}
           >
-		  <View>
+	<View>
 			<View style={{width: 400, height: 70, position: 'absolute', backgroundColor: 'steelblue'}} />		  
 			<TouchableOpacity 
 				style = {styles.Button3}
@@ -99,8 +99,50 @@ export default class buysell extends Component<{}> {
          </Text>
        }
 	   <Text> ──────────────────────────────────── </Text>
-	   
-		  </View>
+	   <View style={styles.container1}>
+			<TextInput style = {styles.input}>
+				{ this.state.mode === 'buy' ?
+				<Text style={styles.welcome1}>
+					Payment
+				</Text> :
+				<Text style={styles.welcome1}>
+					Sell From
+				</Text>
+				}
+			</TextInput>
+	   </View>
+		<View style={styles.container1}>
+		<TextInput style={styles.input1}>
+			$ 0.00
+		</TextInput>
+		<TextInput style={styles.input1}>
+			<Text style={styles.welcome1}>
+					BTC
+				</Text>
+			$ 0.00
+		</TextInput>
+		</View>
+		<View>
+			<TextInput style = {styles.input3}>
+			<Text style={styles.welcome1}>
+					Deposite To
+				</Text>
+			</TextInput>
+	   </View>
+   <TouchableOpacity 
+		style = {styles.Button4}
+		onPress={() => { }}
+	>
+		{ this.state.mode === 'buy' ?
+         <Text style={styles.instructions1}>
+          Buy Bitcoin
+         </Text> :
+         <Text style={styles.instructions1}>
+          Sell Bitcoin
+         </Text>
+       }
+	</TouchableOpacity>   
+	</View>
 	</Modal>
 	</View>
 	
@@ -119,6 +161,33 @@ const styles = StyleSheet.create({
 	//fontWeight: "bold",
     textAlign: 'center',
     margin: 5,
+  },
+    welcome1: {
+    textAlign: 'center',
+	fontSize: 17,
+	marginRight: 50,
+    color: '#000000',
+	fontWeight: "bold",
+    marginBottom: 10,
+  },
+  input: {
+	height: 70,
+	width: 350,
+	marginLeft: 20,
+	backgroundColor: '#ffffff',
+  },
+    input1: {
+	marginTop: 80,
+	height: 70,
+	width: 150,
+	marginLeft: 20,
+	backgroundColor: '#ffffff',
+  },
+    input3: {
+	marginTop: 180,
+	width: 350,
+	marginLeft: 15,
+	backgroundColor: '#ffffff',
   },
    container: {
     flex: 1,
@@ -143,6 +212,16 @@ const styles = StyleSheet.create({
     color: '#ffffff',
 	fontWeight: "bold",
     marginBottom: 10,
+  },
+    instructions1: {
+    //textAlign: 'center',
+	fontSize: 17,
+	marginTop: 17,
+    color: '#ffffff',
+	fontWeight: "bold",
+	//marginTop:350,
+	marginLeft: 135,
+    //marginBottom: 5,
   },
     exitinstructions: {
     textAlign: 'left',
@@ -176,6 +255,14 @@ const styles = StyleSheet.create({
     height: 40,
    // borderTopColor: 'red',
     width: 120,
+  },
+     Button4: {
+    backgroundColor:'steelblue',
+	marginTop: 190,
+	marginLeft: 0,
+    height: 70,
+   // borderTopColor: 'red',
+    width: 400,
   },
    Button2: {
     backgroundColor:'steelblue',
