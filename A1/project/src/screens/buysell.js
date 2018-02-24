@@ -58,6 +58,9 @@ export default class buysell extends Component<{}> {
 	 <Text style={styles.note}>
 		US$ 1.23
 	</Text>
+	
+	
+	<View style={styles.container1}>
 	<TouchableOpacity 
 		style = {styles.Button1}
 		onPress={() => { () => this.setState({modalVisible:true}) }}
@@ -70,6 +73,9 @@ export default class buysell extends Component<{}> {
 	>
 		<Text style={styles.b1}> SELL </Text>
 	</TouchableOpacity>
+	</View>
+	
+	
 	<View style={styles.container}>
 	<Modal
              visible={this.state.modalVisible}
@@ -118,6 +124,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+   container1: {
+    flex: 1,
+	flexDirection: 'row',
+    //justifyContent: 'center',
+  },
    note: {
 	marginTop: 0,
     fontSize: 15,
@@ -160,7 +171,7 @@ const styles = StyleSheet.create({
   },
    Button1: {
     backgroundColor:'steelblue',
-	marginTop: 20,
+	marginTop: 30,
 	marginLeft: 20,
     height: 40,
    // borderTopColor: 'red',
@@ -168,8 +179,8 @@ const styles = StyleSheet.create({
   },
    Button2: {
     backgroundColor:'steelblue',
-	marginTop: 20,
-	marginLeft: 200,
+	marginTop: 30,
+	marginLeft: 60,
     height: 40,
    // borderTopColor: 'red',
     width: 120,
