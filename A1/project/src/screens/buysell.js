@@ -47,17 +47,20 @@ export default class buysell extends Component<{}> {
           123 BTC 
     </Text>
 	 <Text style={styles.note}>
-		US$1.23
+		US$ 1.23
 	</Text>
-	//<Text> BUY </Text>
-	<TouchableOpacity style = {styles.Button1}/*style = {{width: 100, height: 300}}*/
-		//title={'BUY'} 
-		//size = 'small'
-		//color="steelblue"
-		//underlayColor = 'steelblue'
-		//<Text style={styles.b1}> BUY </Text>
+	<TouchableOpacity 
+		style = {styles.Button1}
+		onPress={() => { this.setState({ mode: 'buy' }) }}
+	>
+	<Text style={styles.b1}> BUY </Text>
+	</TouchableOpacity>
+	<TouchableOpacity 
+		style = {styles.Button2}
 		onPress={() => { this.setState({ mode: 'sell' }) }}
-	/>
+	>
+		<Text style={styles.b1}> SELL </Text>
+	</TouchableOpacity>
       </View>
     );
   }
@@ -98,24 +101,33 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#ffffff',
 	fontWeight: "bold",
-	marginTop: 20,
-	marginLeft: 20,
-    //alignItems: 'center',
+	marginTop: 10,
+	marginLeft: 33,
+    alignItems: 'center',
     //justifyContent:'center',
 	//resizeMode: 'contain',
   },
    Button1: {
-   // backgroundColor:'steelblue',
+    backgroundColor:'steelblue',
 	marginTop: 20,
 	marginLeft: 20,
     height: 40,
    // borderTopColor: 'red',
     width: 120,
   },
+   Button2: {
+    backgroundColor:'steelblue',
+	marginTop: 20,
+	marginLeft: 200,
+    height: 40,
+   // borderTopColor: 'red',
+    width: 120,
+	//marginBottom: -20,
+  },
     tabbar: {
     backgroundColor:'white',
     height: 64,
     borderTopColor: 'red',
     borderTopWidth: 2,
-  }
+  },
 });
