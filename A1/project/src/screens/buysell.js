@@ -76,12 +76,13 @@ export default class buysell extends Component<{}> {
              animationType={'slide'}
              onRequestClose={() => this.closeModal()}
           >
-		  <View> 
-			<Text>This is the modal component</Text>
+		  <View>
+			<View style={{width: 400, height: 70, position: 'absolute', backgroundColor: 'steelblue'}} />		  
 			<TouchableOpacity 
 				style = {styles.Button3}
 				onPress={() => { this.closeModal() }}
 			>
+			<Text>X</Text>
 			</TouchableOpacity>
 		  </View>
 	</Modal>
@@ -158,11 +159,11 @@ const styles = StyleSheet.create({
   },
      Button3: {
     backgroundColor:'steelblue',
-	marginTop: 200,
-	marginLeft: 200,
-    height: 40,
+	marginTop: 0,
+	marginLeft: 0,
+    height: 20,
    // borderTopColor: 'red',
-    width: 120,
+    width: 20,
 	//marginBottom: -20,
   },
     tabbar: {
