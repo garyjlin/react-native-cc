@@ -28,8 +28,8 @@ export default class buysell extends Component<{}> {
     super(props);
     
     this.state = {
+	  modalVisible:false,
       mode: 'buy',
-	  modalVisible:true,
     };
     
   }
@@ -40,6 +40,15 @@ export default class buysell extends Component<{}> {
 
   closeModal() {
     this.setState({modalVisible:false});
+  }
+  
+  BuyButton () {
+	 this.setState({ mode: 'buy' })  
+	 this.setState({modalVisible:true})
+  }
+  SellButton () {
+	 this.setState({ mode: 'sell' })  
+	 this.setState({modalVisible:true})
   }
 	
   render() {
@@ -63,13 +72,13 @@ export default class buysell extends Component<{}> {
 	<View style={styles.container1}>
 	<TouchableOpacity 
 		style = {styles.Button1}
-		onPress={() => { () => this.setState({modalVisible:true}) }}
+		onPress={() => { this.BuyButton () }}
 	>
 	<Text style={styles.b1}> BUY </Text>
 	</TouchableOpacity>
 	<TouchableOpacity 
 		style = {styles.Button2}
-		onPress={() => { this.setState({ mode: 'sell' }) }}
+		onPress={() => { this.SellButton () }}
 	>
 		<Text style={styles.b1}> SELL </Text>
 	</TouchableOpacity>

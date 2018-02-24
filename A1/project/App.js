@@ -11,8 +11,8 @@ import buysellscreen from "./src/screens/buysell";
 import homescreen from "./src/screens/home";
 
 var myTabs = TabNavigator({
-	Home: {screen: homescreen},
-	Buy_Sell: {screen: buysellscreen}
+	My_Portfolio: {screen: homescreen},
+	Manage_Account: {screen: buysellscreen}
 },
 {
 	tabBarPosition: 'bottom'
