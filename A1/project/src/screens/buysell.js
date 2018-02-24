@@ -12,7 +12,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { Button } from 'react-native';
+import { Button, Modal } from 'react-native';
 import { TouchableOpacity, TouchableNativeFeedback, TouchableWithoutFeedback } from 'react-native';
 
 
@@ -28,9 +28,18 @@ export default class buysell extends Component<{}> {
     super(props);
     
     this.state = {
-      mode: 'sell'
+      mode: 'sell',
+	  modalVisible:true,
     };
     
+  }
+  
+  openModal() {
+    this.setState({modalVisible:true});
+  }
+
+  closeModal() {
+    this.setState({modalVisible:false});
   }
 	
   render() {
@@ -51,7 +60,7 @@ export default class buysell extends Component<{}> {
 	</Text>
 	<TouchableOpacity 
 		style = {styles.Button1}
-		onPress={() => { this.setState({ mode: 'buy' }) }}
+		onPress={() => { () => this.setState({modalVisible:true}) }}
 	>
 	<Text style={styles.b1}> BUY </Text>
 	</TouchableOpacity>
@@ -61,7 +70,26 @@ export default class buysell extends Component<{}> {
 	>
 		<Text style={styles.b1}> SELL </Text>
 	</TouchableOpacity>
-      </View>
+	<View style={styles.container}>
+	<Modal
+             visible={this.state.modalVisible}
+             animationType={'slide'}
+             onRequestClose={() => this.closeModal()}
+          >
+		  <View> 
+			<Text>This is the modal component</Text>
+			<TouchableOpacity 
+				style = {styles.Button3}
+				onPress={() => { this.closeModal() }}
+			>
+			</TouchableOpacity>
+		  </View>
+	</Modal>
+	</View>
+	
+    </View>
+	
+		    
     );
   }
 }
@@ -74,6 +102,10 @@ const styles = StyleSheet.create({
 	//fontWeight: "bold",
     textAlign: 'center',
     margin: 5,
+  },
+   container: {
+    flex: 1,
+    justifyContent: 'center',
   },
    note: {
 	marginTop: 0,
@@ -118,6 +150,15 @@ const styles = StyleSheet.create({
    Button2: {
     backgroundColor:'steelblue',
 	marginTop: 20,
+	marginLeft: 200,
+    height: 40,
+   // borderTopColor: 'red',
+    width: 120,
+	//marginBottom: -20,
+  },
+     Button3: {
+    backgroundColor:'steelblue',
+	marginTop: 200,
 	marginLeft: 200,
     height: 40,
    // borderTopColor: 'red',
