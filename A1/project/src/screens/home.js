@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Image,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
 import { LineChart } from 'react-native-svg-charts';
@@ -30,23 +31,28 @@ const instructions = Platform.select({
 
 export default class Home extends Component<{}> {
   render() {
-	const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
+	const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80, 20, -50,70,80,90 ]
     return (
       <View>
-	  <View style={{width: 400, height: 200, position: 'absolute', backgroundColor: 'steelblue'}}/>
+	  <View style={{width: 400, height: 120, position: 'absolute', backgroundColor: 'steelblue'}}/>
    	 <Text style={styles.welcome}>
          $USD: 123
       </Text>
       <Text style={styles.instructions}>
           View Your Account 
       </Text>
+	  <TouchableOpacity 
+		style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
+		onPress={() => { }}
+	  >
 		<LineChart
-            style={ { height: 150 } }
+            style={ { height: 100, width: 200, flex: 1, justifyContent: 'flex-end'} }
             data={ data }
-            svg={{ stroke: 'rgb(134, 65, 244)' }}
+            svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
+			showGrid= {false}
             //contentInset={ { top: 50, bottom: 20 } }
         />
-		
+	   </TouchableOpacity>
       </View>
     );
   }
