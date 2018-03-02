@@ -11,7 +11,8 @@ import {
   Image,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 
 import { LineChart } from 'react-native-svg-charts';
@@ -31,9 +32,11 @@ const instructions = Platform.select({
 
 export default class Home extends Component<{}> {
   render() {
-	const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80, 20, -50,70,80,90 ]
+	const data = [ 70, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80, 20, -50,70,80,90 ]
     return (
-      <View>
+	
+<ScrollView style={{flex:1}}>
+    <View style={{flex:1, justifyContent: 'center'}}>
 	  <View style={{width: 400, height: 120, position: 'absolute', backgroundColor: 'steelblue'}}/>
    	 <Text style={styles.welcome}>
          $USD: 123
@@ -41,10 +44,13 @@ export default class Home extends Component<{}> {
       <Text style={styles.instructions}>
           View Your Account 
       </Text>
-	  <TouchableOpacity 
-		style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
-		onPress={() => { }}
-	  >
+    </View>
+	<View style={{flex: 2.5, justifyContent: 'space-around'}}>
+		<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+		<TouchableOpacity 
+			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
+			onPress={() => { }}
+		>
 		<LineChart
             style={ { height: 100, width: 200, flex: 1, justifyContent: 'flex-end'} }
             data={ data }
@@ -53,7 +59,55 @@ export default class Home extends Component<{}> {
             //contentInset={ { top: 50, bottom: 20 } }
         />
 	   </TouchableOpacity>
-      </View>
+	   </View>
+	   
+	   <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+		<TouchableOpacity 
+			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
+			onPress={() => { }}
+		>
+		<LineChart
+            style={ { height: 100, width: 200, flex: 1, justifyContent: 'center'} }
+            data={ data }
+            svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
+			showGrid= {false}
+            //contentInset={ { top: 50, bottom: 20 } }
+        />
+	   </TouchableOpacity>
+	   </View>
+	   
+	      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+		<TouchableOpacity 
+			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
+			onPress={() => { }}
+		>
+		<LineChart
+            style={ { height: 100, width: 200, flex: 1, justifyContent: 'flex-end'} }
+            data={ data }
+            svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
+			showGrid= {false}
+            //contentInset={ { top: 50, bottom: 20 } }
+        />
+	   </TouchableOpacity>
+	   </View>
+	   
+	      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+		<TouchableOpacity 
+			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
+			onPress={() => { }}
+		>
+		<LineChart
+            style={ { height: 100, width: 200, flex: 1, justifyContent: 'flex-end'} }
+            data={ data }
+            svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
+			showGrid= {false}
+            //contentInset={ { top: 50, bottom: 20 } }
+        />
+	   </TouchableOpacity>
+	   </View>
+	   
+	</View>
+</ScrollView>
     );
   }
 }
