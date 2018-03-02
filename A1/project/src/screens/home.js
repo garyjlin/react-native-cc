@@ -13,6 +13,7 @@ import {
   View
 } from 'react-native';
 
+import { LineChart } from 'react-native-svg-charts';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -26,11 +27,10 @@ const instructions = Platform.select({
 	
 }); */
 
+
 export default class Home extends Component<{}> {
   render() {
-	 // const { page } = this.state;
-  //const background = styles[page];
- // const tabbarStyles = [styles.tabbar];
+	const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
     return (
       <View>
 	  <View style={{width: 400, height: 200, position: 'absolute', backgroundColor: 'steelblue'}}/>
@@ -40,15 +40,12 @@ export default class Home extends Component<{}> {
       <Text style={styles.instructions}>
           View Your Account 
       </Text>
-   <Image
-          style={styles.image1}
-          source={require('./price.png')}
-	/>
-	
-	 <Image
-          style={styles.image2}
-          source={require('./bitcoin.png')}
-	/>
+		<LineChart
+            style={ { height: 150 } }
+            data={ data }
+            svg={{ stroke: 'rgb(134, 65, 244)' }}
+            //contentInset={ { top: 50, bottom: 20 } }
+        />
 		
       </View>
     );

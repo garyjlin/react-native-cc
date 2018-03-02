@@ -12,7 +12,7 @@ import homescreen from "./src/screens/home";
 
 var myTabs = TabNavigator({
 	Home: {screen: homescreen},
-	Buy Sell: {screen: buysellscreen}
+	BuySell: {screen: buysellscreen}
 },
 {
 	tabBarPosition: 'bottom'
