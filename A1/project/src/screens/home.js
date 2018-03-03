@@ -32,27 +32,42 @@ const instructions = Platform.select({
 
 export default class Home extends Component<{}> {
   render() {
-	const data = [ 70, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80, 20, -50,70,80,90 ]
+	const data = [ 10, 10, 10, 10, -50, -80, 70, 100 ]
     return (
 	
 <ScrollView style={{flex:1}}>
     <View style={{flex:1, justifyContent: 'center'}}>
-	  <View style={{width: 400, height: 120, position: 'absolute', backgroundColor: 'steelblue'}}/>
-   	 <Text style={styles.welcome}>
-         $USD: 123
-      </Text>
-      <Text style={styles.instructions}>
-          View Your Account 
-      </Text>
+		<View style={{width: 400, height: 120, position: 'absolute', backgroundColor: 'steelblue'}}/>
+		<Text style={styles.welcome}>
+			$USD: 123
+		</Text>
+		<Text style={styles.instructions}>
+			View Your Account 
+		</Text>
     </View>
-	<View style={{flex: 2.5, justifyContent: 'space-around'}}>
-		<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+	<View style={{flex: 3, justifyContent: 'space-between'}}>
+		<View style={{paddingLeft: 55, paddingBottom: 25}}>
 		<TouchableOpacity 
 			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
 			onPress={() => { }}
 		>
 		<LineChart
-            style={ { height: 100, width: 200, flex: 1, justifyContent: 'flex-end'} }
+            style={ { height: 100, width: 200} }
+            data={ data }
+            svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'evenodd', fill: 'orange' }}
+			showGrid= {false}
+            //contentInset={ { top: 50, bottom: 20 } }
+        />
+	   </TouchableOpacity>
+	   </View>
+	   
+	   <View style={{paddingLeft: 55, paddingBottom: 25}}>
+		<TouchableOpacity 
+			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
+			onPress={() => { }}
+		>
+		<LineChart
+            style={ { height: 100, width: 200} }
             data={ data }
             svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
 			showGrid= {false}
@@ -61,13 +76,13 @@ export default class Home extends Component<{}> {
 	   </TouchableOpacity>
 	   </View>
 	   
-	   <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+	      <View style={{paddingLeft: 55, paddingBottom: 25}}>
 		<TouchableOpacity 
 			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
 			onPress={() => { }}
 		>
 		<LineChart
-            style={ { height: 100, width: 200, flex: 1, justifyContent: 'center'} }
+            style={ { height: 100, width: 200} }
             data={ data }
             svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
 			showGrid= {false}
@@ -76,28 +91,13 @@ export default class Home extends Component<{}> {
 	   </TouchableOpacity>
 	   </View>
 	   
-	      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+	      <View style={{paddingLeft: 55, paddingBottom: 25}}>
 		<TouchableOpacity 
 			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
 			onPress={() => { }}
 		>
 		<LineChart
-            style={ { height: 100, width: 200, flex: 1, justifyContent: 'flex-end'} }
-            data={ data }
-            svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
-			showGrid= {false}
-            //contentInset={ { top: 50, bottom: 20 } }
-        />
-	   </TouchableOpacity>
-	   </View>
-	   
-	      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-		<TouchableOpacity 
-			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
-			onPress={() => { }}
-		>
-		<LineChart
-            style={ { height: 100, width: 200, flex: 1, justifyContent: 'flex-end'} }
+            style={ { height: 100, width: 200} }
             data={ data }
             svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
 			showGrid= {false}
