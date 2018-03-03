@@ -17,6 +17,8 @@ import {
 
 import { LineChart } from 'react-native-svg-charts';
 
+import Svg,{Polyline} from 'react-native-svg';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -32,9 +34,8 @@ const instructions = Platform.select({
 
 export default class Home extends Component<{}> {
   render() {
-	const data = [ 10, 10, 10, 10, -50, -80, 70, 100 ]
+	const data = [ 10, 10, 10, 10, -50, -80, 70, 100 ] //sample data
     return (
-	
 <ScrollView style={{flex:1}}>
     <View style={{flex:1, justifyContent: 'center'}}>
 		<View style={{width: 400, height: 120, position: 'absolute', backgroundColor: 'steelblue'}}/>
@@ -46,66 +47,58 @@ export default class Home extends Component<{}> {
 		</Text>
     </View>
 	<View style={{flex: 3, justifyContent: 'space-between'}}>
-		<View style={{paddingLeft: 55, paddingBottom: 25}}>
-		<TouchableOpacity 
-			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
-			onPress={() => { }}
-		>
-		<LineChart
-            style={ { height: 100, width: 200} }
-            data={ data }
-            svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'evenodd', fill: 'orange' }}
-			showGrid= {false}
-            //contentInset={ { top: 50, bottom: 20 } }
-        />
-	   </TouchableOpacity>
-	   </View>
-	   
-	   <View style={{paddingLeft: 55, paddingBottom: 25}}>
-		<TouchableOpacity 
-			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
-			onPress={() => { }}
-		>
-		<LineChart
-            style={ { height: 100, width: 200} }
-            data={ data }
-            svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
-			showGrid= {false}
-            //contentInset={ { top: 50, bottom: 20 } }
-        />
-	   </TouchableOpacity>
-	   </View>
-	   
-	      <View style={{paddingLeft: 55, paddingBottom: 25}}>
-		<TouchableOpacity 
-			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
-			onPress={() => { }}
-		>
-		<LineChart
-            style={ { height: 100, width: 200} }
-            data={ data }
-            svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
-			showGrid= {false}
-            //contentInset={ { top: 50, bottom: 20 } }
-        />
-	   </TouchableOpacity>
-	   </View>
-	   
-	      <View style={{paddingLeft: 55, paddingBottom: 25}}>
-		<TouchableOpacity 
-			style = {{height: 150, width: 250, paddingLeft: 20, paddingRight: 20, paddingTop: 20, backgroundColor: '#ffffff'}}
-			onPress={() => { }}
-		>
-		<LineChart
-            style={ { height: 100, width: 200} }
-            data={ data }
-            svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
-			showGrid= {false}
-            //contentInset={ { top: 50, bottom: 20 } }
-        />
-	   </TouchableOpacity>
-	   </View>
-	   
+		<View style={styles.Chartpos}>
+			<TouchableOpacity 
+				style = {styles.Chartbutton}
+				onPress={() => { }}
+			>
+			<LineChart
+				style={styles.Chartlinesize}
+				data={ data }
+				svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'evenodd', fill: 'orange' }}
+				showGrid= {false}
+			/>
+			</TouchableOpacity>
+		</View>
+		<View style={styles.Chartpos}>
+			<TouchableOpacity 
+				style = {styles.Chartbutton}
+				onPress={() => { }}
+			>
+			<LineChart
+				style={styles.Chartlinesize}
+				data={ data }
+				svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
+				showGrid= {false}
+			/>
+			</TouchableOpacity>
+		</View>   
+	    <View style={styles.Chartpos}>
+			<TouchableOpacity 
+				style = {styles.Chartbutton}
+				onPress={() => { }}
+			>
+			<LineChart
+				style={styles.Chartlinesize}
+				data={ data }
+				svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
+				showGrid= {false}
+			/>
+			</TouchableOpacity>
+		</View>
+	    <View style={styles.Chartpos}>
+			<TouchableOpacity 
+				style = {styles.Chartbutton}
+				onPress={() => { }}
+			>
+			<LineChart
+				style={styles.Chartlinesize}
+				data={ data }
+				svg={{ stroke: 'rgb(134, 65, 244)', fillRule: 'nonzero', fill: 'orange' }}
+				showGrid= {false}
+			/>
+			</TouchableOpacity>
+		</View>	   
 	</View>
 </ScrollView>
     );
@@ -142,6 +135,22 @@ const styles = StyleSheet.create({
     //justifyContent:'center',
 	resizeMode: 'contain',
 	//borderBottomWidthWidthWidth: -100
+  },
+	Chartbutton: {
+		height: 150, 
+		width: 250, 
+		paddingLeft: 20, 
+		paddingRight: 20, 
+		paddingTop: 20, 
+		backgroundColor: '#ffffff'
+  },
+  Chartlinesize: {
+	  height: 100, 
+	  width: 200
+  },
+  Chartpos: {
+	  paddingLeft: 55, 
+	  paddingBottom: 25
   },
     tabbar: {
     backgroundColor:'white',
