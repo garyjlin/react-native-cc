@@ -35,7 +35,7 @@ const instructions = Platform.select({
 export default class Home extends Component<{}> {
   render() {
 	const data = [ 10, 0, 10, 10, -50, -80, 70, 80] //sample data
-  const contentInset = { top: 5, bottom: 5}
+  const contentInset = { top: 5, bottom: 5, left: 5, right: 5}
     return (
 		<ScrollView style={{flex:1}}>
 			<View style={{flex:1, justifyContent: 'center'}}>
@@ -72,15 +72,19 @@ export default class Home extends Component<{}> {
 						numberOfTicks={10}
 					/>
           </View>
-          <View style={{flex: 1}}>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <View style={{flex: 1}}>
+            </View>
+            <View style={{flex: 3}}>
             <XAxis
-              style={{ paddingTop: 10}}
+              style={{ paddingTop: 10, marginHorizontal: 1}}
               data={ data }
-              spacing={0.02}
+              spacing={0}
             //  formatLabel={ value => index }
-              contentInset={{ contentInset }}
+              //contentInset={{ contentInset }}
               svg={{ fontSize: 10 }}
               />
+              </View>
             </View>
 					</TouchableOpacity>
 				</View>
