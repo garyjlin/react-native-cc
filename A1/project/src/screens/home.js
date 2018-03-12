@@ -159,7 +159,7 @@ export default class Home extends Component<{}> {
 					>
           <View style={{flex: 3, flexDirection: 'row'}}>
           <YAxis
-                  data={data}
+                  data={this.state.apidata}
                   style={{flex: 1, height: 100,}}
                   contentInset={ contentInset }
                   svg={{
@@ -170,7 +170,7 @@ export default class Home extends Component<{}> {
           />
 					<LineChart
 						style={styles.Chartlinesize}
-						data={ data }
+						data={ this.state.apidata }
 						svg={{ stroke: 'rgb(134, 65, 244)'}}
 						showGrid= {true}
 						numberOfTicks={10}
@@ -182,7 +182,7 @@ export default class Home extends Component<{}> {
             <View style={{flex: 5}}>
             <XAxis
               style={{ paddingTop: 10, marginHorizontal: 0}}
-              data={ data }
+              data={ this.state.apidata }
               spacing={0.2}
               formatLabel={ value => 'day ' + value }
               contentInset={{ contentInset2 }}
@@ -199,7 +199,7 @@ export default class Home extends Component<{}> {
 					>
           <View style={{flex: 3, flexDirection: 'row'}}>
           <YAxis
-                  data={data}
+                  data={this.state.apidata}
                   style={{flex: 1, height: 100,}}
                   contentInset={ contentInset }
                   svg={{
@@ -210,7 +210,7 @@ export default class Home extends Component<{}> {
           />
 					<LineChart
 						style={styles.Chartlinesize}
-						data={ data }
+						data={ this.state.apidata }
 						svg={{ stroke: 'rgb(134, 65, 244)'}}
 						showGrid= {true}
 						numberOfTicks={10}
@@ -222,7 +222,7 @@ export default class Home extends Component<{}> {
             <View style={{flex: 5}}>
             <XAxis
               style={{ paddingTop: 10, marginHorizontal: 0}}
-              data={ data }
+              data={ this.state.apidata }
               spacing={0.2}
               formatLabel={ value => 'day ' + value }
               contentInset={{ contentInset2 }}
@@ -239,7 +239,7 @@ export default class Home extends Component<{}> {
 					>
           <View style={{flex: 3, flexDirection: 'row'}}>
           <YAxis
-                  data={data}
+                  data={this.state.apidata}
                   style={{flex: 1, height: 100,}}
                   contentInset={ contentInset }
                   svg={{
@@ -250,7 +250,7 @@ export default class Home extends Component<{}> {
           />
 					<LineChart
 						style={styles.Chartlinesize}
-						data={ data }
+						data={ this.state.apidata }
 						svg={{ stroke: 'rgb(134, 65, 244)'}}
 						showGrid= {true}
 						numberOfTicks={10}
@@ -262,7 +262,7 @@ export default class Home extends Component<{}> {
             <View style={{flex: 5}}>
             <XAxis
               style={{ paddingTop: 10, marginHorizontal: 0}}
-              data={ data }
+              data={ this.state.apidata }
               spacing={0.2}
               formatLabel={ value => 'day ' + value }
               contentInset={{ contentInset2 }}
