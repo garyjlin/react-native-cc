@@ -26,14 +26,14 @@ const instructions = Platform.select({
 export default class buysell extends Component<{}> {
 	constructor(props) {
     super(props);
-    
+
     this.state = {
 	  modalVisible:false,
       mode: 'buy',
     };
-    
+
   }
-  
+
   openModal() {
     this.setState({modalVisible:true});
   }
@@ -41,16 +41,16 @@ export default class buysell extends Component<{}> {
   closeModal() {
     this.setState({modalVisible:false});
   }
-  
+
   BuyButton () {
-	 this.setState({ mode: 'buy' })  
+	 this.setState({ mode: 'buy' })
 	 this.setState({modalVisible:true})
   }
   SellButton () {
-	 this.setState({ mode: 'sell' })  
+	 this.setState({ mode: 'sell' })
 	 this.setState({modalVisible:true})
   }
-	
+
   render() {
   // const { page } = this.state;
   //const background = styles[page];
@@ -59,32 +59,32 @@ export default class buysell extends Component<{}> {
       <View>
 	  <View style={{width: 400, height: 150, position: 'absolute', backgroundColor: 'steelblue'}} />
       <Text style={styles.instructions}>
-          Bitcoin 
+          Bitcoin
       </Text>
 	<Text style={styles.welcome}>
-          123 BTC 
+          123 BTC
     </Text>
 	 <Text style={styles.note}>
 		US$ 1.23
 	</Text>
-	
-	
+
+
 	<View style={styles.container1}>
-	<TouchableOpacity 
+	<TouchableOpacity
 		style = {styles.Button1}
 		onPress={() => { this.BuyButton () }}
 	>
 	<Text style={styles.b1}> BUY </Text>
 	</TouchableOpacity>
-	<TouchableOpacity 
+	<TouchableOpacity
 		style = {styles.Button2}
 		onPress={() => { this.SellButton () }}
 	>
 		<Text style={styles.b1}> SELL </Text>
 	</TouchableOpacity>
 	</View>
-	
-	
+
+
 	<View style={styles.container}>
 	<Modal
              visible={this.state.modalVisible}
@@ -92,8 +92,8 @@ export default class buysell extends Component<{}> {
              onRequestClose={() => this.closeModal()}
           >
 	<View>
-			<View style={{width: 400, height: 70, position: 'absolute', backgroundColor: 'steelblue'}} />		  
-			<TouchableOpacity 
+			<View style={{width: 400, height: 70, position: 'absolute', backgroundColor: 'steelblue'}} />
+			<TouchableOpacity
 				style = {styles.Button3}
 				onPress={() => { this.closeModal() }}
 			>
@@ -138,7 +138,7 @@ export default class buysell extends Component<{}> {
 				</Text>
 			</TextInput>
 	   </View>
-   <TouchableOpacity 
+   <TouchableOpacity
 		style = {styles.Button4}
 		onPress={() => { }}
 	>
@@ -150,14 +150,14 @@ export default class buysell extends Component<{}> {
           Sell Bitcoin
          </Text>
        }
-	</TouchableOpacity>   
+	</TouchableOpacity>
 	</View>
 	</Modal>
 	</View>
-	
+
     </View>
-	
-		    
+
+
     );
   }
 }
@@ -250,9 +250,9 @@ const styles = StyleSheet.create({
   b1: {
     fontSize: 17,
     color: '#ffffff',
-	fontWeight: "bold",
-	marginTop: 10,
-	marginLeft: 33,
+	  fontWeight: "bold",
+	  marginTop: 10,
+	  marginLeft: 33,
     alignItems: 'center',
     //justifyContent:'center',
 	//resizeMode: 'contain',
