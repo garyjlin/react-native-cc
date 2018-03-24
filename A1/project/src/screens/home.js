@@ -17,6 +17,8 @@ import {
   RefreshControl
 } from 'react-native';
 
+import moment from 'moment';
+
 import { LineChart, YAxis, XAxis } from 'react-native-svg-charts';
 
 import Svg,{Polyline} from 'react-native-svg';
@@ -30,7 +32,6 @@ const instructions = Platform.select({
 
 /*var myTabs = TabNavigator({
 	Tab1: {screen: buysellscreen}
-
 }); */
 
 
@@ -38,8 +39,21 @@ export default class Home extends Component<{}> {
 
   constructor(props) {
     super(props);
+    var today = new Date ();
+    var day = parseInt(today.getMonth()+1)
+    var realday;
+    if (day < 10) {
+      realday = '0'+ parseInt(today.getMonth()+1).toString()
+    }
+    else {
+      realday = parseInt(today.getMonth()+1).toString()
+    }
+    var date1 = today.getFullYear() + '-' + realday + '-' + today.getDate()
+    var test1 = moment('2018-03-03').format('DATE_RFC2822')
+    //var dow =test1.day();
+    console.log(test1);
     this.state = {stock: 'Microsoft',
-      date: '2018-03-16',
+      date: date1 ,
       time: ':00',
       minute: '1',
       hour: '10',
@@ -62,7 +76,7 @@ export default class Home extends Component<{}> {
                   var  close_price = parseInt(response['Time Series (1min)']
                                                     [this.state.date + ' '+this.state.hour +':00'+this.state.time]
                                                     ['4. close'],10)
-                  SampleArray.push(close_price);
+                SampleArray.push(close_price);
                 console.log(close_price)
                 console.log(min)
               }
@@ -70,7 +84,7 @@ export default class Home extends Component<{}> {
                   var  close_price = parseInt(response['Time Series (1min)']
                                                     [this.state.date + ' '+ this.state.hour +':0'+this.state.minute+this.state.time]
                                                     ['4. close'],10)
-                  SampleArray.push(close_price);
+                SampleArray.push(close_price);
                 min = min + 1;
                 this.setState({minute: min.toString()})
                 console.log(close_price)
@@ -80,7 +94,7 @@ export default class Home extends Component<{}> {
                   var  close_price = parseInt(response['Time Series (1min)']
                                                   [this.state.date + ' ' + this.state.hour +':'+this.state.minute+this.state.time]
                                                   ['4. close'],10)
-                  SampleArray.push(close_price);
+                SampleArray.push(close_price);
                 min = min + 1;
                 this.setState({minute: min.toString()})
                 console.log(close_price)
@@ -104,6 +118,7 @@ export default class Home extends Component<{}> {
             console.log(error);
           }
         )
+        console.log(date1)
   }
 
   openModal() {
@@ -420,7 +435,7 @@ export default class Home extends Component<{}> {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', paddingRight: 20}}>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', paddingRight: 15}}>
           <TouchableOpacity
             style = {{backgroundColor: 'steelblue',
         	            marginTop: 30,
@@ -435,7 +450,7 @@ export default class Home extends Component<{}> {
                             color: '#000000',
             	              fontWeight: "bold",
             	              marginTop: 13,
-            	              marginLeft: 22,
+            	              marginLeft: 15,
                             alignItems: 'center',}}> 1 H </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -452,7 +467,7 @@ export default class Home extends Component<{}> {
                             color: '#000000',
                             fontWeight: "bold",
                             marginTop: 13,
-                            marginLeft: 22,
+                            marginLeft: 15,
                             alignItems: 'center',}}> 1 D </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -470,7 +485,25 @@ export default class Home extends Component<{}> {
                             fontWeight: "bold",
                             marginTop: 13,
                             //marginRight: 10,
-                            marginLeft: 22,
+                            marginLeft: 15,
+                            alignItems: 'center',}}> 1 W </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style = {{backgroundColor: 'steelblue',
+                      marginTop: 30,
+                      flex: 1,
+                      marginLeft: 10,
+                      marginRight: 10,
+                      height: 40,
+                      width: 30,}}
+            onPress={() => { }}
+            >
+              <Text style={{fontSize: 10,
+                            color: '#000000',
+                            fontWeight: "bold",
+                            marginTop: 13,
+                            //marginRight: 10,
+                            marginLeft: 15,
                             alignItems: 'center',}}> 1 M </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -487,7 +520,7 @@ export default class Home extends Component<{}> {
                             fontWeight: "bold",
                             marginTop: 13,
                             //marginRight: 10,
-                            marginLeft: 22,
+                            marginLeft: 15,
                             alignItems: 'center',}}> 1 Y </Text>
           </TouchableOpacity>
         </View>
