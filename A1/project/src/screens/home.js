@@ -53,7 +53,7 @@ export default class Home extends Component<{}> {
     //var dow =test1.day();
     console.log(test1);
     this.state = {stock: 'Microsoft',
-      date: date1 ,
+      date: '2018-03-23',//date1 ,
       time: ':00',
       minute: '1',
       hour: '10',
@@ -61,7 +61,8 @@ export default class Home extends Component<{}> {
       refreshing: false,
       modalVisible: true,
       apidata: [],
-      apidata2: []
+      apidata2: [],
+      lastweek: ['2018-03-19','2018-03-20','2018-03-21','2018-03-22','2018-03-23']
     }
     fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&outputsize=full&apikey=V9TWS1DHAOGM19LS')
       .then((response) => response.json())
@@ -461,7 +462,61 @@ export default class Home extends Component<{}> {
                       marginRight: 10,
                       height: 40,
                       width: 30,}}
-            onPress={() => { }}
+            onPress={() => {fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&outputsize=full&apikey=V9TWS1DHAOGM19LS')
+                            .then((response) => response.json())
+                            .then(
+                              (response) => {
+                              var SampleArray = [];
+                              var hr = 10;
+                              var min = 1;
+                              for (var i=0; i < 6 ; i++) {
+                                for (var j = 0; j < 59; ++j) {
+                                  if (j == 0){
+                                      var  close_price = parseInt(response['Time Series (1min)']
+                                                                        [this.state.date + ' '+this.state.hour +':00'+this.state.time]
+                                                                        ['4. close'],10)
+                                    SampleArray.push(close_price);
+                                    console.log(close_price)
+                                    console.log(min)
+                                  }
+                                  else if ( j < 10) {
+                                      var  close_price = parseInt(response['Time Series (1min)']
+                                                                        [this.state.date + ' '+ this.state.hour +':0'+this.state.minute+this.state.time]
+                                                                        ['4. close'],10)
+                                    SampleArray.push(close_price);
+                                    min = min + 1;
+                                    this.setState({minute: min.toString()})
+                                    console.log(close_price)
+                                    console.log(min)
+                                  }
+                                  else {
+                                      var  close_price = parseInt(response['Time Series (1min)']
+                                                                      [this.state.date + ' ' + this.state.hour +':'+this.state.minute+this.state.time]
+                                                                      ['4. close'],10)
+                                    SampleArray.push(close_price);
+                                    min = min + 1;
+                                    this.setState({minute: min.toString()})
+                                    console.log(close_price)
+                                    console.log(min)
+                                  }
+                                }
+                                hr = hr + 1;
+                                this.setState({hour: hr.toString()})
+                                min = 1;
+                                this.setState({minute: min.toString()})
+                                console.log(this.state.minute)
+                                //console.log(close_price)
+                                //this.setState({price: close_price})
+                              }
+                              this.setState({apidata: SampleArray})
+                              this.setState({apidata2: SampleArray})
+                              hr = 10;
+                              this.setState({hour: hr.toString()})
+                            }).catch(
+                              (error) => {
+                                console.log(error);
+                              }
+                    )}}
             >
               <Text style={{fontSize: 10,
                             color: '#000000',
@@ -478,7 +533,29 @@ export default class Home extends Component<{}> {
                       marginRight: 10,
                       height: 40,
                       width: 30,}}
-            onPress={() => { }}
+            onPress={() => {fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=60min&outputsize=fill&apikey=V9TWS1DHAOGM19LS')
+                             .then((response) => response.json())
+                             .then(
+                             (response) => {
+                              var SampleArray = [];
+                              var count = 10;
+                              for (var i=0; i < 4 ; i++) {
+                                for (var j = 0; j < 7; ++j) {
+                                 var  close_price = parseInt(response['Time Series (60min)'][this.state.lastweek[i]+ ' ' + this.state.hour +':00:00']['4. close'],10)
+                                 SampleArray.push(close_price);
+                                 count = count + 1;
+                                this.setState({hour: count.toString()})
+                                  console.log(close_price)
+                                }
+                              count = 10
+                              this.setState({hour: count.toString()})
+                             }
+                             this.setState({apidata2: SampleArray})
+                             }).catch(
+                             (error) => {
+                              console.log(error);
+                            }
+                   )}}
             >
               <Text style={{fontSize: 10,
                             color: '#000000',
