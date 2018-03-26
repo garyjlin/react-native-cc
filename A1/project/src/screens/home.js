@@ -39,7 +39,8 @@ export default class Home extends Component<{}> {
 
   constructor(props) {
     super(props);
-    var today = new Date ();
+    var today = new Date ()
+    //console.log(currenthour + 1)
     var day = parseInt(today.getMonth()+1)
     var realday;
     if (day < 10) {
@@ -54,6 +55,7 @@ export default class Home extends Component<{}> {
     console.log(test1);
     this.state = {stock: 'Microsoft',
       date: '2018-03-23',//date1 ,
+      pastdate: '2018-03-23',
       time: ':00',
       minute: '1',
       hour: '10',
@@ -62,8 +64,11 @@ export default class Home extends Component<{}> {
       modalVisible: true,
       apidata: [],
       apidata2: [],
-      lastweek: ['2018-03-19','2018-03-20','2018-03-21','2018-03-22','2018-03-23']
+      currenthour: '12',
+      lastweek: ['2018-03-19','2018-03-20','2018-03-21','2018-03-22','2018-03-23'],
+      rfc2822: ''
     }
+    this.setState({currenthour: today.getHours().toString()})
     fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&outputsize=full&apikey=V9TWS1DHAOGM19LS')
       .then((response) => response.json())
       .then(
@@ -128,6 +133,11 @@ export default class Home extends Component<{}> {
 
   closeModal() {
     this.setState({modalVisible:false});
+  }
+
+  setHour () {
+    var today = new Date ()
+    this.setState({currenthour: today.getHours().toString()})
   }
 
   _onRefresh() {
@@ -445,7 +455,177 @@ export default class Home extends Component<{}> {
                       marginRight: 10,
                       height: 40,
                       width: 30,}}
-            onPress={() => { }}
+            onPress={() => {//this.setState({currenthour: 16})
+                              this.setHour ()
+                              console.log(this.state.currenthour)
+                              if (parseInt(this.state.currenthour,10) <= 16 && parseInt(this.state.currenthour,10) >= 11) {
+                                fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&outputsize=full&apikey=V9TWS1DHAOGM19LS')
+                                  .then((response) => response.json())
+                                  .then(
+                                    (response) => {
+                                      var SampleArray = [];
+                                      var hr = parseInt(this.state.currenthour, 10) - 1
+                                      this.setState({currenthour: hr.toString()})
+                                      var min = 1;
+                                      for (var i=0; i < 1 ; i++) {
+                                        for (var j = 0; j < 59; ++j) {
+                                          if (j == 0){
+                                              var  close_price = parseInt(response['Time Series (1min)']
+                                                                                [this.state.date + ' '+this.state.currenthour +':00'+this.state.time]
+                                                                                ['4. close'],10)
+                                            SampleArray.push(close_price);
+                                            console.log(close_price)
+                                            console.log(min)
+                                          }
+                                          else if ( j < 10) {
+                                              var  close_price = parseInt(response['Time Series (1min)']
+                                                                                [this.state.date + ' '+ this.state.currenthour +':0'+this.state.minute+this.state.time]
+                                                                                ['4. close'],10)
+                                            SampleArray.push(close_price);
+                                            min = min + 1;
+                                            this.setState({minute: min.toString()})
+                                            console.log(close_price)
+                                            console.log(min)
+                                          }
+                                          else {
+                                              var  close_price = parseInt(response['Time Series (1min)']
+                                                                              [this.state.date + ' ' + this.state.currenthour +':'+this.state.minute+this.state.time]
+                                                                              ['4. close'],10)
+                                            SampleArray.push(close_price);
+                                            min = min + 1;
+                                            this.setState({minute: min.toString()})
+                                            console.log(close_price)
+                                            console.log(min)
+                                          }
+                                        }
+                                        min = 1;
+                                        this.setState({minute: min.toString()})
+                                        console.log(this.state.minute)
+                                        //console.log(close_price)
+                                        //this.setState({price: close_price})
+                                      }
+                                      this.setState({apidata2: SampleArray})
+                                      console.log(this.state.currenthour)
+                                    }).catch(
+                                      (error) => {
+                                        console.log(error);
+                                      }
+                                    )
+
+                              }
+                              else if (parseInt(this.state.currenthour,10) < 11) {
+                                this.setState({currenthour: '16'})
+                                fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&outputsize=full&apikey=V9TWS1DHAOGM19LS')
+                                  .then((response) => response.json())
+                                  .then(
+                                    (response) => {
+                                      var SampleArray = [];
+                                      var hr = parseInt(this.state.currenthour, 10) - 1
+                                      this.setState({currenthour: hr.toString()})
+                                      var min = 1;
+                                      for (var i=0; i < 1 ; i++) {
+                                        for (var j = 0; j < 59; ++j) {
+                                          if (j == 0){
+                                              var  close_price = parseInt(response['Time Series (1min)']
+                                                                                [this.state.pastdate + ' '+this.state.currenthour +':00'+this.state.time]
+                                                                                ['4. close'],10)
+                                            SampleArray.push(close_price);
+                                            console.log(close_price)
+                                            console.log(min)
+                                          }
+                                          else if ( j < 10) {
+                                              var  close_price = parseInt(response['Time Series (1min)']
+                                                                                [this.state.pastdate + ' '+ this.state.currenthour +':0'+this.state.minute+this.state.time]
+                                                                                ['4. close'],10)
+                                            SampleArray.push(close_price);
+                                            min = min + 1;
+                                            this.setState({minute: min.toString()})
+                                            console.log(close_price)
+                                            console.log(min)
+                                          }
+                                          else {
+                                              var  close_price = parseInt(response['Time Series (1min)']
+                                                                              [this.state.pastdate + ' ' + this.state.currenthour +':'+this.state.minute+this.state.time]
+                                                                              ['4. close'],10)
+                                            SampleArray.push(close_price);
+                                            min = min + 1;
+                                            this.setState({minute: min.toString()})
+                                            console.log(close_price)
+                                            console.log(min)
+                                          }
+                                        }
+                                        min = 1;
+                                        this.setState({minute: min.toString()})
+                                        console.log(this.state.minute)
+                                        //console.log(close_price)
+                                        //this.setState({price: close_price})
+                                      }
+                                      this.setState({apidata2: SampleArray})
+                                    }).catch(
+                                      (error) => {
+                                        console.log(error);
+                                      }
+                                    )
+                                    console.log(this.state.currenthour)
+                              }
+                              else {
+                                this.setState({currenthour: '16'})
+                                fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&outputsize=full&apikey=V9TWS1DHAOGM19LS')
+                                  .then((response) => response.json())
+                                  .then(
+                                    (response) => {
+                                      var SampleArray = [];
+                                      var hr = parseInt(this.state.currenthour, 10) - 1
+                                      this.setState({currenthour: hr.toString()})
+                                      var min = 1;
+                                      for (var i=0; i < 1 ; i++) {
+                                        for (var j = 0; j < 59; ++j) {
+                                          if (j == 0){
+                                              var  close_price = parseInt(response['Time Series (1min)']
+                                                                                [this.state.date + ' '+this.state.currenthour +':00'+this.state.time]
+                                                                                ['4. close'],10)
+                                            SampleArray.push(close_price);
+                                            console.log(close_price)
+                                            console.log(min)
+                                          }
+                                          else if ( j < 10) {
+                                              var  close_price = parseInt(response['Time Series (1min)']
+                                                                                [this.state.date + ' '+ this.state.currenthour +':0'+this.state.minute+this.state.time]
+                                                                                ['4. close'],10)
+                                            SampleArray.push(close_price);
+                                            min = min + 1;
+                                            this.setState({minute: min.toString()})
+                                            console.log(close_price)
+                                            console.log(min)
+                                          }
+                                          else {
+                                              var  close_price = parseInt(response['Time Series (1min)']
+                                                                              [this.state.date + ' ' + this.state.currenthour +':'+this.state.minute+this.state.time]
+                                                                              ['4. close'],10)
+                                            SampleArray.push(close_price);
+                                            min = min + 1;
+                                            this.setState({minute: min.toString()})
+                                            console.log(close_price)
+                                            console.log(min)
+                                          }
+                                        }
+                                        min = 1;
+                                        this.setState({minute: min.toString()})
+                                        console.log(this.state.minute)
+                                        //console.log(close_price)
+                                        //this.setState({price: close_price})
+                                      }
+                                      this.setState({apidata2: SampleArray})
+                                      console.log(this.state.currenthour)
+                                      console.log('correct case')
+                                    }).catch(
+                                      (error) => {
+                                        console.log(error);
+                                      }
+                                    )
+
+                              }
+             }}
             >
               <Text style={{fontSize: 10,
                             color: '#000000',
