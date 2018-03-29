@@ -57,7 +57,7 @@ export default class Home extends Component<{}> {
       dayofweek1 = test1.substring(4,5)
     }
     console.log(dayofweek1)
-    dayofweek1 = '6' //TEST! PLEASE REMOVE
+    dayofweek1 = '7' //TEST! PLEASE REMOVE
     //recompute date if on weekend, just pure calculation function
     if (dayofweek1 == '6' || dayofweek1 == '7') {
       if (dayofweek1 == '6') {
@@ -145,8 +145,8 @@ export default class Home extends Component<{}> {
     console.log(date1)
     //Fetch entire week based on days
     var week = []
-    var d = 3 //FIX TO SYSTEM AFTER! TEST FOR NOW
-    var m = 2
+    var d = 4 //FIX TO SYSTEM AFTER! TEST FOR NOW
+    var m = 3
     var y = today.getFullYear()
     if (dayofweek1 == '6'){
           d = d - 5
@@ -155,6 +155,7 @@ export default class Home extends Component<{}> {
             if (m == 1 || m == 3|| m == 5|| m == 7|| m == 8|| m == 10|| m == 12) {
               var start = 31 + d
               for (var i = 0; i <= (0-d); ++i) {
+                console.log(start)
                   week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
                   start = start + 1
               }
@@ -162,6 +163,7 @@ export default class Home extends Component<{}> {
             else if (m == 4|| m == 6|| m == 9|| m == 11) {
               var start = 30 + d
               for (var i = 0; i <= (0-d); ++i) {
+                console.log(start)
                   week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
                   start = start + 1
               }
@@ -170,6 +172,7 @@ export default class Home extends Component<{}> {
               if (y%4 == 0) {
                 var start = 29 + d
                 for (var i = 0; i <= (0-d); ++i) {
+                  console.log(start)
                     week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
                     start = start + 1
                 }
@@ -177,19 +180,68 @@ export default class Home extends Component<{}> {
               else{
                 var start = 28 + d
                 for (var i = 0; i <= (0-d); ++i) {
+                  console.log(start)
                     week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
                     start = start + 1
                 }
               }
             }
+            m = m + 1
+            var start = d + 5 - (4-(0-d))
+            for (var i = 0; i < 4-(0-d); ++i) {
+              console.log(start)
+              week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+              start = start + 1
           }
-          m = m + 1
-          var start = d + 5 - (4-(0-d))
-          for (var i = 0; i < 4-(0-d); ++i) {
-            week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
-            start = start + 1
           }
       }
+      if (dayofweek1 == '7'){
+            d = d - 6
+            if (d < 1) { //take in a few days from last month, not account for cross year, fix later!!!!
+              m = m -1
+              if (m == 1 || m == 3|| m == 5|| m == 7|| m == 8|| m == 10|| m == 12) {
+                var start = 31 + d
+                for (var i = 0; i <= (0-d); ++i) {
+                  console.log(start)
+                    week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+                    start = start + 1
+                }
+              }
+              else if (m == 4|| m == 6|| m == 9|| m == 11) {
+                var start = 30 + d
+                for (var i = 0; i <= (0-d); ++i) {
+                  console.log(start)
+                    week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+                    start = start + 1
+                }
+              }
+              else { //feburary month
+                if (y%4 == 0) {
+                  var start = 29 + d
+                  for (var i = 0; i <= (0-d); ++i) {
+                    console.log(start)
+                      week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+                      start = start + 1
+                  }
+                }
+                else{
+                  var start = 28 + d
+                  for (var i = 0; i <= (0-d); ++i) {
+                    console.log(start)
+                      week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+                      start = start + 1
+                  }
+                }
+              }
+              m = m + 1
+              var start = d + 6 - (5-(0-d))
+              for (var i = 0; i < 5-(0-d); ++i) {
+                console.log(start)
+                week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+                start = start + 1
+            }
+            }
+        }
     //var dow =test1.day();
     this.state = {stock: 'Microsoft',
       date: date1,//date1 ,
