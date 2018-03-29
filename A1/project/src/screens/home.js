@@ -145,8 +145,8 @@ export default class Home extends Component<{}> {
     console.log(date1)
     //Fetch entire week based on days
     var week = []
-    var d = 6 //FIX TO SYSTEM AFTER! TEST FOR NOW
-    var m = 5
+    var d = 25 //FIX TO SYSTEM AFTER! TEST FOR NOW
+    var m = 3
     var y = today.getFullYear()
     if (dayofweek1 == '6'){
           d = d - 5
@@ -194,6 +194,14 @@ export default class Home extends Component<{}> {
               start = start + 1
           }
           }
+          else { //this month has enough days to cover the week
+            var start = d
+            for (var i = 0; i < 5; ++i) {
+              console.log(start)
+              week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+              start = start + 1
+            }
+          }
       }
       if (dayofweek1 == '7'){
             d = d - 6
@@ -240,6 +248,14 @@ export default class Home extends Component<{}> {
                 week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
                 start = start + 1
             }
+            }
+            else { //this month has enough days to cover the week
+              var start = d
+              for (var i = 0; i < 5; ++i) {
+                console.log(start)
+                week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+                start = start + 1
+              }
             }
         }
     //var dow =test1.day();
