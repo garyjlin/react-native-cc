@@ -598,8 +598,124 @@ export default class Home extends Component<{}> {
           }
         }
 
-        for (var i = 0; i < 29; ++i){
-          console.log(montharr[i])
+        //Build a year array to retrieve annual prices
+        var yeararr = []
+        var y1 = today.getFullYear() - 1
+        if (y1%4 == 0) {//leap year
+          var m1 = 1
+          for (var i = 0; i < 12; ++i) {
+            var start = 1
+            if (m1 == 1 || m1 == 3 || m1 == 5 || m1 == 7 || m1 == 8 || m1 == 10 || m1 == 12) {
+              for (var j = 0; j < 31; ++j) {
+                if (start < 10 && m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-0' + start.toString())
+                }
+                else if (start < 10) {
+                yeararr.push(y1.toString() + '-' + m1.toString() + '-0' + start.toString())
+                }
+                else if (m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-' + start.toString())
+                }
+                else {
+                  yeararr.push(y1.toString() + '-' + m1.toString() + '-' + start.toString())
+                }
+                start = start + 1
+              }
+            }
+            else if (m1 == 4 || m1== 6 || m1== 9 || m1== 11) {
+              for (var j = 0; j < 30; ++j) {
+                if (start < 10 && m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-0' + start.toString())
+                }
+                else if (start < 10) {
+                yeararr.push(y1.toString() + '-' + m1.toString() + '-0' + start.toString())
+                }
+                else if (m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-' + start.toString())
+                }
+                else {
+                  yeararr.push(y1.toString() + '-' + m1.toString() + '-' + start.toString())
+                }
+                start = start + 1
+              }
+            }
+            else {
+              for (var j = 0; j < 29; ++j) {
+                if (start < 10 && m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-0' + start.toString())
+                }
+                else if (start < 10) {
+                yeararr.push(y1.toString() + '-' + m1.toString() + '-0' + start.toString())
+                }
+                else if (m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-' + start.toString())
+                }
+                else {
+                  yeararr.push(y1.toString() + '-' + m1.toString() + '-' + start.toString())
+                }
+                start = start + 1
+              }
+            }
+                m1 = m1 + 1
+          }
+        }
+        else{//normal non leap year
+          var m1 = 1
+          for (var i = 0; i < 12; ++i) {
+            var start = 1
+            if (m1 == 1 || m1 == 3 || m1 == 5 || m1 == 7 || m1 == 8 || m1 == 10 || m1 == 12) {
+              for (var j = 0; j < 31; ++j) {
+                if (start < 10 && m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-0' + start.toString())
+                }
+                else if (start < 10) {
+                yeararr.push(y1.toString() + '-' + m1.toString() + '-0' + start.toString())
+                }
+                else if (m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-' + start.toString())
+                }
+                else {
+                  yeararr.push(y1.toString() + '-' + m1.toString() + '-' + start.toString())
+                }
+                start = start + 1
+              }
+            }
+            else if (m1 == 4 || m1== 6 || m1== 9 || m1== 11) {
+              for (var j = 0; j < 30; ++j) {
+                if (start < 10 && m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-0' + start.toString())
+                }
+                else if (start < 10) {
+                yeararr.push(y1.toString() + '-' + m1.toString() + '-0' + start.toString())
+                }
+                else if (m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-' + start.toString())
+                }
+                else {
+                  yeararr.push(y1.toString() + '-' + m1.toString() + '-' + start.toString())
+                }
+                start = start + 1
+              }
+            }
+            else {
+              for (var j = 0; j < 28; ++j) {
+                if (start < 10 && m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-0' + start.toString())
+                }
+                else if (start < 10) {
+                yeararr.push(y1.toString() + '-' + m1.toString() + '-0' + start.toString())
+                }
+                else if (m1 < 10) {
+                yeararr.push(y1.toString() + '-0' + m1.toString() + '-' + start.toString())
+                }
+                else {
+                  yeararr.push(y1.toString() + '-' + m1.toString() + '-' + start.toString())
+                }
+                start = start + 1
+              }
+            }
+                m1 = m1 + 1
+          }
         }
     //var dow =test1.day();
     this.state = {stock: 'Microsoft',
@@ -616,6 +732,7 @@ export default class Home extends Component<{}> {
       currenthour: '12',
       lastweek: week,
       lastmonth: montharr,
+      lastyear: yeararr,
       rfc2822: ''
     }
     this.setState({currenthour: today.getHours().toString()})
@@ -1337,7 +1454,24 @@ export default class Home extends Component<{}> {
                       marginLeft: 10,
                       height: 40,
                       width: 30,}}
-            onPress={() => { }}
+            onPress={() => {fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&outputsize=full&apikey=V9TWS1DHAOGM19LS') //monthly price data
+                             .then((response) => response.json())
+                             .then(
+                             (response) => {
+                              var SampleArray = [];
+                              for (var i=0; i < this.state.lastyear.length; ++i) {
+                                  if (response['Time Series (Daily)'][this.state.lastyear[i]]) {
+                                   var  close_price = parseInt(response['Time Series (Daily)'][this.state.lastyear[i]]['4. close'],10)
+                                   SampleArray.push(close_price);
+                                  console.log(close_price)
+                                  }
+                                }
+                             this.setState({apidata2: SampleArray})
+                             }).catch(
+                             (error) => {
+                              console.log(error);
+                            }
+                   ) }}
             >
               <Text style={{fontSize: 10,
                             color: '#000000',
