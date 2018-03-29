@@ -57,7 +57,7 @@ export default class Home extends Component<{}> {
       dayofweek1 = test1.substring(4,5)
     }
     console.log(dayofweek1)
-    dayofweek1 = '3' //TEST! PLEASE REMOVE
+    //dayofweek1 = '3' //TEST! PLEASE REMOVE
     //recompute date if on weekend, just pure calculation function
     if (dayofweek1 == '6' || dayofweek1 == '7') {
       if (dayofweek1 == '6') {
@@ -145,8 +145,8 @@ export default class Home extends Component<{}> {
     console.log(date1)
     //Fetch entire week based on days
     var week = []
-    var d = 7 //FIX TO SYSTEM AFTER! TEST FOR NOW
-    var m = 3
+    var d = today.getDate() //FIX TO SYSTEM AFTER! TEST FOR NOW
+    var m = today.getMonth() + 1
     var y = today.getFullYear()
     if (dayofweek1 == '6'){
           d = d - 5
@@ -525,6 +525,82 @@ export default class Home extends Component<{}> {
             }
           }
         }
+        // build a past month array
+        m = today.getMonth()
+        var montharr = []
+        if (m == 1 || m == 3|| m == 5 || m == 7 || m == 8 || m == 10 || m == 12){
+          var start = 1
+          for (var i = 0; i < 31; ++i) {
+            if (start < 10 && m < 10) {
+            montharr.push(today.getFullYear() + '-0' + m.toString() + '-0' + start.toString())
+            }
+            else if (start < 10) {
+            montharr.push(today.getFullYear() + '-' + m.toString() + '-0' + start.toString())
+            }
+            else if (m < 10) {
+            montharr.push(today.getFullYear() + '-0' + m.toString() + '-' + start.toString())
+            }
+            else {
+              montharr.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+            }
+            start = start + 1
+          }
+        }
+        else if (m == 4 || m == 6|| m == 9 || m == 11 ){
+          var start = 1
+          for (var i = 0; i < 30; ++i) {
+            if (start < 10 && m < 10) {
+            montharr.push(today.getFullYear() + '-0' + m.toString() + '-0' + start.toString())
+            }
+            else if (start < 10) {
+            montharr.push(today.getFullYear() + '-' + m.toString() + '-0' + start.toString())
+            }
+            else if (m < 10) {
+            montharr.push(today.getFullYear() + '-0' + m.toString() + '-' + start.toString())
+            }
+            else {
+              montharr.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+            }
+            start = start + 1
+          }
+        }
+        else if (m==2){
+          var start = 1
+          var end
+          if (y%4 == 0) {
+            end = 29
+          }
+          else {
+            end = 28
+          }
+          for (var i = 0; i < end; ++i) {
+            if (start < 10 && m < 10) {
+            montharr.push(today.getFullYear() + '-0' + m.toString() + '-0' + start.toString())
+            }
+            else if (start < 10) {
+            montharr.push(today.getFullYear() + '-' + m.toString() + '-0' + start.toString())
+            }
+            else if (m < 10) {
+            montharr.push(today.getFullYear() + '-0' + m.toString() + '-' + start.toString())
+            }
+            else {
+              montharr.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
+            }
+            start = start + 1
+          }
+        }
+        else { // go back to prev year december
+          var y1 = today.getFullYear() - 1
+          var start = 1
+          for (var i = 0; i < 31; ++i){
+            montharr.push(y1.toString() + '-' + '12' + '-' + start.toString())
+            start = start + 1
+          }
+        }
+
+        for (var i = 0; i < 29; ++i){
+          console.log(montharr[i])
+        }
     //var dow =test1.day();
     this.state = {stock: 'Microsoft',
       date: date1,//date1 ,
@@ -539,6 +615,7 @@ export default class Home extends Component<{}> {
       apidata2: [],
       currenthour: '12',
       lastweek: week,
+      lastmonth: montharr,
       rfc2822: ''
     }
     this.setState({currenthour: today.getHours().toString()})
@@ -1226,7 +1303,24 @@ export default class Home extends Component<{}> {
                       marginRight: 10,
                       height: 40,
                       width: 30,}}
-            onPress={() => { }}
+            onPress={() => {fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&outputsize=full&apikey=V9TWS1DHAOGM19LS') //monthly price data
+                             .then((response) => response.json())
+                             .then(
+                             (response) => {
+                              var SampleArray = [];
+                              for (var i=0; i < this.state.lastmonth.length; ++i) {
+                                  if (response['Time Series (Daily)'][this.state.lastmonth[i]]) {
+                                   var  close_price = parseInt(response['Time Series (Daily)'][this.state.lastmonth[i]]['4. close'],10)
+                                   SampleArray.push(close_price);
+                                  console.log(close_price)
+                                  }
+                                }
+                             this.setState({apidata2: SampleArray})
+                             }).catch(
+                             (error) => {
+                              console.log(error);
+                            }
+                   ) }}
             >
               <Text style={{fontSize: 10,
                             color: '#000000',
