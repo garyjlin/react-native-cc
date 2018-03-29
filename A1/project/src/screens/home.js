@@ -145,8 +145,8 @@ export default class Home extends Component<{}> {
     console.log(date1)
     //Fetch entire week based on days
     var week = []
-    var d = 4 //FIX TO SYSTEM AFTER! TEST FOR NOW
-    var m = 3
+    var d = 6 //FIX TO SYSTEM AFTER! TEST FOR NOW
+    var m = 5
     var y = today.getFullYear()
     if (dayofweek1 == '6'){
           d = d - 5
@@ -234,8 +234,8 @@ export default class Home extends Component<{}> {
                 }
               }
               m = m + 1
-              var start = d + 6 - (5-(0-d))
-              for (var i = 0; i < 5-(0-d); ++i) {
+              var start = d + 6 - (6-(0-d) - 1)
+              for (var i = 0; i < 5-(0-d)-1; ++i) {
                 console.log(start)
                 week.push(today.getFullYear() + '-' + m.toString() + '-' + start.toString())
                 start = start + 1
