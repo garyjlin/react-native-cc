@@ -57,9 +57,10 @@ export default class Home extends Component<{}> {
       dayofweek1 = test1.substring(4,5)
     }
     console.log(dayofweek1)
-    //dayofweek1 = '3' //TEST! PLEASE REMOVE
+    //dayofweek1 = '6' //TEST! PLEASE REMOVE
+
     //recompute date if on weekend, just pure calculation function
-    if (dayofweek1 == '6' || dayofweek1 == '7') {
+    /*if (dayofweek1 == '6' || dayofweek1 == '7') {
       if (dayofweek1 == '6') {
         var d = today.getDate()
         var m = today.getMonth() + 1
@@ -141,7 +142,7 @@ export default class Home extends Component<{}> {
             date1 = today.getFullYear() + '-' + m.toString() + '-' + today.getDate()
           }
       }
-    } //end of calculation
+    } */ //end of calculation
     console.log(date1)
     //Fetch entire week based on days
     var week = []
@@ -525,6 +526,72 @@ export default class Home extends Component<{}> {
             }
           }
         }
+//use week array to determine last working day when used on weekends
+        var yesterday
+        if (dayofweek1 == '6' || dayofweek1 == '7') {
+          date1 = week[week.length-1]
+          yesterday = week[week.length-2]
+        }
+        else if (dayofweek1 == '1' ){
+          yesterday = week[week.length-2]
+        }
+        else{
+          console.log('the day i am on to compute yester day is'+today)
+          var d = today.getDate () //FIX TO SYSTEM AFTER! TEST FOR NOW
+          var m = today.getMonth() + 1
+          var y = today.getFullYear()
+          console.log('d is '+ d + 'm is '+ m + 'y is '+ y)
+          if (d == 1) {
+            m = m - 1
+            if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) {
+              if (m < 10) {
+                yesterday = y.toString() + '-0' + m.toString() + '-31'
+              }
+              else {
+                yesterday = y.toString() + '-' +m.toString() + '-31'
+              }
+            }
+            else if (m == 4 || m == 6 || m == 9 || m == 11) {
+              if (m < 10) {
+                yesterday = y.toString() + '-0' + m.toString() + '-30'
+              }
+              else {
+                yesterday = y.toString() + '-' +m.toString() + '-30'
+              }
+            }
+            else if (m == 2){
+              if (y % 4 == 0) {
+                yesterday = y.toString() + '-02'  + '-29'
+              }
+              else {
+                yesterday = y.toString() + '-02' + '-28'
+              }
+            }
+            else {
+              var y2 = y - 1
+              yesterday = y2.toString() + '-12' + '-31'
+            }
+          }
+          else {
+            d = d - 1
+            if (d < 10 && m < 10) {
+              yesterday = y.toString() + '-0' + m.toString() + '-0' + d.toString()
+            }
+            else if (d < 10) {
+              yesterday = y.toString() + '-' + m.toString() + '-0' + d.toString()
+            }
+            else if (m < 10) {
+            yesterday = y.toString() + '-0' + m.toString() + '-' +d.toString()
+            }
+            else {
+              yesterday = y.toString() + '-' + m.toString() + '-' + d.toString()
+            }
+          }
+        }
+        console.log('yesterday is '+ yesterday)
+
+      console.log(date1)
+
         // build a past month array
         m = today.getMonth()
         var montharr = []
@@ -718,9 +785,25 @@ export default class Home extends Component<{}> {
           }
         }
     //var dow =test1.day();
+    var ch
+    var istoday
+    var h = today.getHours()
+    if (h > 16) {
+      istoday = true
+      ch = 16
+    }
+    else if (h < 11){
+      istoday = false
+      ch = 16
+    }
+    else{
+      istoday = true
+      ch = h
+    }
+    ch = ch.toString()
     this.state = {stock: 'Microsoft',
       date: date1,//date1 ,
-      pastdate: '2018-03-23',
+      pastdate: yesterday,
       time: ':00',
       minute: '1',
       hour: '10',
@@ -729,13 +812,13 @@ export default class Home extends Component<{}> {
       modalVisible: true,
       apidata: [],
       apidata2: [],
-      currenthour: '12',
+      currenthour: ch,
       lastweek: week,
       lastmonth: montharr,
       lastyear: yeararr,
+      todayh: istoday,
       rfc2822: ''
     }
-    this.setState({currenthour: today.getHours().toString()})
     fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&outputsize=full&apikey=V9TWS1DHAOGM19LS')
       .then((response) => response.json())
       .then(
@@ -802,9 +885,59 @@ export default class Home extends Component<{}> {
     this.setState({modalVisible:false});
   }
 
-  setHour () {
-    var today = new Date ()
-    this.setState({currenthour: today.getHours().toString()})
+//find a business date one before today
+  FindPrevDate (date) {
+    var today = date
+    var d = parseInt(today.substring(8,9),10)
+    var m = parseInt(today.substring(5,6),10)
+    var y = parseInt(today.substring(0,3),10)
+    if (d = 1) {
+      m = m - 1
+      if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) {
+        if (m < 10) {
+          yesterday = y.toString() + '-0' + m.toString() + '-31'
+        }
+        else {
+          yesterday = y.toString() + '-' +m.toString() + '-31'
+        }
+      }
+      else if (m == 4 || m == 6 || m == 9 || m == 11) {
+        if (m < 10) {
+          yesterday = y.toString() + '-0' + m.toString() + '-30'
+        }
+        else {
+          yesterday = y.toString() + '-' +m.toString() + '-30'
+        }
+      }
+      else if (m == 2){
+        if (y % 4 == 0) {
+          yesterday = y.toString() + '-02'  + '-29'
+        }
+        else {
+          yesterday = y.toString() + '-02' + '-28'
+        }
+      }
+      else {
+        var y2 = y - 1
+        yesterday = y2.toString() + '-12' + '-31'
+      }
+    }
+    else {
+      d = d - 1
+      if (d < 10 && m < 10) {
+        yesterday = y.toString() + '-0' + m.toString() + '-0' + d.toString()
+      }
+      else if (d < 10) {
+        yesterday = y.toString() + '-' + m.toString() + '-0' + d.toString()
+      }
+      else if (m < 10) {
+      yesterday = y.toString() + '-0' + m.toString() + '-' +d.toString()
+      }
+      else {
+        yesterday = y.toString() + '-' + m.toString() + '-' + d.toString()
+      }
+    }
+    return yesterday
   }
 
   _onRefresh() {
@@ -1123,15 +1256,16 @@ export default class Home extends Component<{}> {
                       height: 40,
                       width: 30,}}
             onPress={() => {//this.setState({currenthour: 16})
-                              this.setHour ()
                               console.log(this.state.currenthour)
-                              if (parseInt(this.state.currenthour,10) <= 16 && parseInt(this.state.currenthour,10) >= 11) {
+                              if (parseInt(this.state.currenthour,10) <= 16 && parseInt(this.state.currenthour,10) >= 11 && this.state.todayh == true) {
+                                console.log('todays price are being displayed')
                                 fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&outputsize=full&apikey=V9TWS1DHAOGM19LS')
                                   .then((response) => response.json())
                                   .then(
                                     (response) => {
                                       var SampleArray = [];
                                       var hr = parseInt(this.state.currenthour, 10) - 1
+                                      console.log('price for the hour'+hr)
                                       this.setState({currenthour: hr.toString()})
                                       var min = 1;
                                       for (var i=0; i < 1 ; i++) {
@@ -1180,8 +1314,7 @@ export default class Home extends Component<{}> {
                                     )
 
                               }
-                              else if (parseInt(this.state.currenthour,10) < 11) {
-                                this.setState({currenthour: '16'})
+                              else if (this.state.todayh==false) {
                                 fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&outputsize=full&apikey=V9TWS1DHAOGM19LS')
                                   .then((response) => response.json())
                                   .then(
@@ -1235,7 +1368,7 @@ export default class Home extends Component<{}> {
                                     )
                                     console.log(this.state.currenthour)
                               }
-                              else {
+                              /*else {
                                 this.setState({currenthour: '16'})
                                 fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&outputsize=full&apikey=V9TWS1DHAOGM19LS')
                                   .then((response) => response.json())
@@ -1291,7 +1424,7 @@ export default class Home extends Component<{}> {
                                       }
                                     )
 
-                              }
+                              }*/ //dont need the else case for now
              }}
             >
               <Text style={{fontSize: 10,
