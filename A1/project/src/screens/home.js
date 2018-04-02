@@ -864,7 +864,7 @@ export default class Home extends Component<{}> {
       hour: '10',
       interval: 'daily',
       refreshing: false,
-      modalVisible: true,
+      modalVisible: false,
       apidata: [],
       apidata2: [],
       currenthour: ch, //TEST ONLY! REMOVE AFTER!
@@ -1248,7 +1248,7 @@ export default class Home extends Component<{}> {
         <View style={styles.Chartpos}>
 					<TouchableOpacity
 						style = {styles.Chartbutton}
-						onPress={() => { }}
+						onPress={() => { this.openModal () }}
 					>
           <View style={{flex: 3, flexDirection: 'row'}}>
           <YAxis
@@ -1288,7 +1288,7 @@ export default class Home extends Component<{}> {
         <View style={styles.Chartpos}>
 					<TouchableOpacity
 						style = {styles.Chartbutton}
-						onPress={() => { }}
+						onPress={() => { this.openModal () }}
 					>
           <View style={{flex: 3, flexDirection: 'row'}}>
           <YAxis
@@ -1328,7 +1328,7 @@ export default class Home extends Component<{}> {
         <View style={styles.Chartpos}>
 					<TouchableOpacity
 						style = {styles.Chartbutton}
-						onPress={() => { }}
+						onPress={() => { this.openModal () }}
 					>
           <View style={{flex: 3, flexDirection: 'row'}}>
           <YAxis
