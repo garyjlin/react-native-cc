@@ -49,7 +49,13 @@ export default class Home extends Component<{}> {
     else {
       realday = parseInt(today.getMonth()+1).toString()
     }
-    var date1 = today.getFullYear() + '-' + realday + '-' + today.getDate()
+    var date1
+    if (today.getDate() < 10) {
+      date1 = today.getFullYear() + '-' + realday + '-0' + today.getDate()
+  }
+  else {
+      date1 = today.getFullYear() + '-' + realday + '-' + today.getDate()
+  }
     var test1 = moment(date1).format('DATE_RFC2822')
     console.log (test1)
     var dayofweek1 = test1.substring(5,6)
@@ -57,6 +63,7 @@ export default class Home extends Component<{}> {
       dayofweek1 = test1.substring(4,5)
     }
     console.log(dayofweek1)
+    //date1 = '2018-03-30' //TEST ONLY! REMOVE AFTER
     //dayofweek1 = '6' //TEST! PLEASE REMOVE
 
     //recompute date if on weekend, just pure calculation function
@@ -272,11 +279,18 @@ export default class Home extends Component<{}> {
       }
     else if (dayofweek1 == '7'){
             d = d - 6
+            var end
             if (d < 1) { //take in a few days from last month, not account for cross year, fix later!!!!
               m = m -1
               if (m == 1 || m == 3|| m == 5|| m == 7|| m == 8|| m == 10|| m == 12) {
                 var start = 31 + d
-                for (var i = 0; i <= (0-d); ++i) {
+                if ((0-d) > 4) {
+                  end = 4
+                }
+                else {
+                  end = (0-d)
+                }
+                for (var i = 0; i <= end; ++i) {
                   console.log(start)
                     if (start < 10 && m < 10) {
                     week.push(today.getFullYear() + '-0' + m.toString() + '-0' + start.toString())
@@ -295,7 +309,13 @@ export default class Home extends Component<{}> {
               }
               else if (m == 4|| m == 6|| m == 9|| m == 11) {
                 var start = 30 + d
-                for (var i = 0; i <= (0-d); ++i) {
+                if ((0-d) > 4) {
+                  end = 4
+                }
+                else {
+                  end = (0-d)
+                }
+                for (var i = 0; i <= end; ++i) {
                   console.log(start)
                     if (start < 10 && m < 10) {
                     week.push(today.getFullYear() + '-0' + m.toString() + '-0' + start.toString())
@@ -526,14 +546,17 @@ export default class Home extends Component<{}> {
             }
           }
         }
-//use week array to determine last working day when used on weekends
+        for (var i = 0; i < week.length; ++i){
+          console.log('inside my week array ' + week[i])
+        }
+//use week array to determine last working day when used on weekends, yesterday does not skip back to last year
         var yesterday
         if (dayofweek1 == '6' || dayofweek1 == '7') {
           date1 = week[week.length-1]
           yesterday = week[week.length-2]
         }
         else if (dayofweek1 == '1' ){
-          yesterday = week[week.length-2]
+          yesterday = week[week.length-1]
         }
         else{
           console.log('the day i am on to compute yester day is'+today)
@@ -588,10 +611,42 @@ export default class Home extends Component<{}> {
             }
           }
         }
-        console.log('yesterday is '+ yesterday)
 
-      console.log(date1)
+      //readjust date if it is a known holiday for the stock exchanges
 
+      if (date1 === '2018-02-19'||date1 === '2018-05-21'||date1 == '2018-07-02'||date1 == '2018-08-06'||date1 == '2018-09-03'||date1 == '2018-10-08'||date1 == '2018-01-15'||date1 == '2018-05-28') {
+        date1 = yesterday
+        yesterday = week[week.length-2]
+      }
+      else if (yesterday == '2018-02-19'||yesterday == '2018-05-21'||yesterday == '2018-07-02'||yesterday == '2018-08-06'||yesterday == '2018-09-03'||yesterday == '2018-10-08'||yesterday == '2018-01-15'||yesterday == '2018-05-28') {
+        yesterday = week[week.length-1]
+      }
+      else if (date1 == '2018-03-30' || date1 == '2018-12-25'|| date1 == '2018-12-26' || date1 == '2018-07-04'|| date1 == '2018-11-22') {
+        date1 = yesterday
+      }
+     else if (yesterday === '2018-03-30') {
+        yesterday = '2018-03-29'
+      }
+      else if (yesterday == '2018-12-25') {
+        yesterday = '2018-12-24'
+      }
+      else if (date1 == '2018-12-26') {
+        date1 = '2018-12-24'
+        yesterday = '2018-12-24'
+      }
+      else if (yesterday == '2018-12-26') {
+        yesterday = '2018-12-24'
+      }
+     else if (yesterday == '2018-07-04') {
+        yesterday = '2018-07-03'
+      }
+      else if (yesterday == '2018-11-22') {
+        yesterday = '2018-11-20'
+      }
+
+      console.log('yesterday is '+ yesterday)
+
+      console.log('today is '+date1)
         // build a past month array
         m = today.getMonth()
         var montharr = []
