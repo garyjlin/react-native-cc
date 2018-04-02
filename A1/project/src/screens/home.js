@@ -614,33 +614,33 @@ export default class Home extends Component<{}> {
 
       //readjust date if it is a known holiday for the stock exchanges
 
-      if (date1 === '2018-02-19'||date1 === '2018-05-21'||date1 == '2018-07-02'||date1 == '2018-08-06'||date1 == '2018-09-03'||date1 == '2018-10-08'||date1 == '2018-01-15'||date1 == '2018-05-28') {
+      if (date1 === '2018-02-19'||date1 === '2018-05-21'||date1 === '2018-07-02'||date1 === '2018-08-06'||date1 === '2018-09-03'||date1 === '2018-10-08'||date1 === '2018-01-15'||date1 === '2018-05-28') {
         date1 = yesterday
         yesterday = week[week.length-2]
       }
-      else if (yesterday == '2018-02-19'||yesterday == '2018-05-21'||yesterday == '2018-07-02'||yesterday == '2018-08-06'||yesterday == '2018-09-03'||yesterday == '2018-10-08'||yesterday == '2018-01-15'||yesterday == '2018-05-28') {
+      else if (yesterday === '2018-02-19'||yesterday === '2018-05-21'||yesterday === '2018-07-02'||yesterday === '2018-08-06'||yesterday === '2018-09-03'||yesterday === '2018-10-08'||yesterday === '2018-01-15'||yesterday === '2018-05-28') {
         yesterday = week[week.length-1]
       }
-      else if (date1 == '2018-03-30' || date1 == '2018-12-25'|| date1 == '2018-12-26' || date1 == '2018-07-04'|| date1 == '2018-11-22') {
+      else if (date1 === '2018-03-30' || date1 === '2018-12-25'|| date1 === '2018-12-26' || date1 === '2018-07-04'|| date1 === '2018-11-22') {
         date1 = yesterday
       }
      else if (yesterday === '2018-03-30') {
         yesterday = '2018-03-29'
       }
-      else if (yesterday == '2018-12-25') {
+      else if (yesterday === '2018-12-25') {
         yesterday = '2018-12-24'
       }
-      else if (date1 == '2018-12-26') {
+      else if (date1 === '2018-12-26') {
         date1 = '2018-12-24'
         yesterday = '2018-12-24'
       }
-      else if (yesterday == '2018-12-26') {
+      else if (yesterday === '2018-12-26') {
         yesterday = '2018-12-24'
       }
-     else if (yesterday == '2018-07-04') {
+     else if (yesterday === '2018-07-04') {
         yesterday = '2018-07-03'
       }
-      else if (yesterday == '2018-11-22') {
+      else if (yesterday === '2018-11-22') {
         yesterday = '2018-11-20'
       }
 
