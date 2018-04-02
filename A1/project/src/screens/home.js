@@ -864,7 +864,7 @@ export default class Home extends Component<{}> {
       hour: '10',
       interval: 'daily',
       refreshing: false,
-      modalVisible: true,
+      modalVisible: false,
       apidata: [],
       apidata2: [],
       currenthour: ch, //TEST ONLY! REMOVE AFTER!
