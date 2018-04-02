@@ -864,7 +864,7 @@ export default class Home extends Component<{}> {
       hour: '10',
       interval: 'daily',
       refreshing: false,
-      modalVisible: false,
+      modalVisible: true,
       apidata: [],
       apidata2: [],
       currenthour: ch, //TEST ONLY! REMOVE AFTER!
@@ -986,6 +986,7 @@ export default class Home extends Component<{}> {
                 //this.setState({price: close_price})
               }
               this.setState({apidata: SampleArray})
+              this.setState({apidata2: SampleArray})
               hr = 10;
               this.setState({hour: hr.toString()})
             }).catch(
@@ -1172,6 +1173,7 @@ export default class Home extends Component<{}> {
                 //this.setState({price: close_price})
               }
               this.setState({apidata: SampleArray})
+              this.setState({apidata2: SampleArray})
               hr = 10;
               this.setState({hour: hr.toString()})
             }).catch(
