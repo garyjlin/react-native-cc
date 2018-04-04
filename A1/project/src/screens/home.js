@@ -1741,6 +1741,7 @@ export default class Home extends Component<{}> {
                           //this.setState({price: close_price})
                         }
                         this.setState({apidata: SampleArray})
+                        this.setState({apidata2: SampleArray})
                         hr = 10;
                         this.setState({hour: hr.toString()})
                       }).catch(
